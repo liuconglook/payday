@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="payday">
+    <output-path>$PROJECT_DIR$/out/artifacts/payday</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="PaydayApplication" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="pay day" />
+        <option name="vendor" value="belean" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="payday.jar">
+        <element id="module-output" name="payday" />
+      </element>
+      <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.6" />
+    </root>
+  </artifact>
+</component>
