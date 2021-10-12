@@ -1,7 +1,6 @@
 package com.belean.payday.transaction;
 
 import com.belean.payday.method.MailMethod;
-import com.belean.payday.method.PaymentMethod;
 
 /**
  * @author belean

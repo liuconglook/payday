@@ -17,9 +17,12 @@ public class BiweeklySchedule implements PaymentSchedule {
         return weekOfMonth == 1;
     }
 
-    public static void main(String[] args) {
-        BiweeklySchedule biweeklySchedule = new BiweeklySchedule();
-        biweeklySchedule.isPayDate(new Date(2021, 1-1, 2));
+    @Override
+    public Date getPayPeriodStartDate(Date payDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(payDate);
+        calendar.add(Calendar.DATE, -14);
 
+        return calendar.getTime();
     }
 }

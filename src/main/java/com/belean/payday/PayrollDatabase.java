@@ -1,9 +1,7 @@
 package com.belean.payday;
 
-import com.belean.payday.classification.SalesReceipt;
 import com.belean.payday.employee.Employee;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,11 +56,5 @@ public interface PayrollDatabase {
      * @param memberId
      */
     void removeUnionMember(int memberId);
-
-    /**
-     * 获取所有雇员id
-     * @return
-     */
-    List<Integer> getAllEmployeeIds();
 
 }

@@ -10,7 +10,8 @@ public interface Affiliation {
 
     /**
      * 计算扣除的费用
+     * @param payCheck
      * @return
      */
-    double calculateDeductions();
+    double calculateDeductions(PayCheck payCheck);
 }

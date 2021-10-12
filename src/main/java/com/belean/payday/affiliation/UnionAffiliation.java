@@ -1,10 +1,9 @@
 package com.belean.payday.affiliation;
 
+import com.belean.payday.transaction.PayCheck;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -28,7 +27,7 @@ public class UnionAffiliation implements Affiliation {
     }
 
     public boolean addServiceCharge(double charge, Date date) {
-        ServiceCharge serviceCharge = new ServiceCharge(memberId, charge, date);
+        ServiceCharge serviceCharge = new ServiceCharge(charge, date);
         return serviceCharges.add(serviceCharge);
     }
 
@@ -41,8 +40,22 @@ public class UnionAffiliation implements Affiliation {
     }
 
     @Override
-    public double calculateDeductions() {
-        Double charge = serviceCharges.stream().map(serviceCharge -> serviceCharge.getCharge()).reduce(0d, (a, b) -> a + b);
-        return charge + dues;
+    public double calculateDeductions(PayCheck payCheck) {
+        int fridays = numberOfFridaysInPayPeriod(payCheck.getPayPeriodStartDate(), payCheck.getPayDate());
+        return dues * fridays;
+    }
+
+    public int numberOfFridaysInPayPeriod(Date payPeriodStart, Date payPeriodEnd) {
+        int fridays = 0;
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Shanghai"));
+        calendar.setTime(payPeriodStart);
+        while(payPeriodEnd.after(calendar.getTime())) {
+            calendar.add(Calendar.DATE, 1);
+            if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
+                System.out.println(calendar.getTime());
+                fridays++;
+            }
+        }
+        return fridays;
     }
 }

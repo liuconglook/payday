@@ -4,7 +4,6 @@ import com.belean.payday.transaction.PayCheck;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,12 +42,18 @@ public class CommissionedClassification implements PaymentClassification {
 
     @Override
     public double calculatePay(PayCheck payCheck) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(payCheck.getPayDate());
-        calendar.set(Calendar.DATE, -14);
-        payCheck.setPayPeriodEndDate(calendar.getTime());
+        double totalSales = 0d;
+        for(SalesReceipt salesReceipt : salesReceipts) {
+            if(isInPayPeriod(salesReceipt, payCheck)) {
+                totalSales += salesReceipt.getSales();
+            }
+        }
+        return totalSales * commissionRate + salary;
+    }
 
-        Double commission = salesReceipts.stream().map(SalesReceipt::getSales).reduce(0d, (a, b) -> a + b);
-        return commission * commissionRate + salary;
+    private boolean isInPayPeriod(SalesReceipt salesReceipt, PayCheck payCheck) {
+        Date payPeriodEndDate = payCheck.getPayDate();
+        return (salesReceipt.getDate().getTime() >= payCheck.getPayPeriodStartDate().getTime())
+                && (salesReceipt.getDate().getTime() <= payPeriodEndDate.getTime());
     }
 }

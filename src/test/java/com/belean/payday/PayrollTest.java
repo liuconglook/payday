@@ -329,7 +329,6 @@ public class PayrollTest extends TestCase {
         PayCheck paycheck = pt.getPaycheck(empId);
         assertNotNull(paycheck);
         assertEquals(payDate, paycheck.getPayDate());
-        assertEquals(payDate, paycheck.getPayPeriodEndDate());
         assertEquals("Hold", paycheck.getDisposition());
         assertEquals(pay, paycheck.getNetPay(), 0.001d);
         assertEquals(0d, paycheck.getDeductions(), 0.001d);
@@ -414,7 +413,7 @@ public class PayrollTest extends TestCase {
 
         Date payDate = new Date(2021, 9 - 1, 9);
         Date payDate2 = new Date(2021, 9 - 1, 10);
-        Date payDate3 = new Date(2021, 9 - 1, 3);
+        Date payDate3 = new Date(2021, 9 - 1, 2);
         TimeCardTransaction tct = new TimeCardTransaction(empId, payDate, 9.0d);
         tct.execute();
         TimeCardTransaction tct2 = new TimeCardTransaction(empId, payDate2, 2.0d);
@@ -425,6 +424,25 @@ public class PayrollTest extends TestCase {
         PaydayTransaction pt = new PaydayTransaction(payDate2);
         pt.execute();
         validatePaycheck(empId, payDate2, pt, ((8 + 1.5) * 15.25d) + (2d * 15.25d));
+    }
+
+    /**
+     * 扣除会费（月薪，加入协会，支付日）
+     */
+    public void testSalariedUnionMemberDues() {
+        int empId = 1;
+        AddSalariedEmployee ase = new AddSalariedEmployee(empId, "Bob", "Home", 1000.00d);
+        ase.execute();
+
+        ChangeMemberTransaction cmt = new ChangeMemberTransaction(empId, 7734, 9.42d);
+        cmt.execute();
+
+        Date payDate = new Date(2021, 9-1, 30);
+        PaydayTransaction pt = new PaydayTransaction(payDate);
+        pt.execute();
+
+        validatePaycheck(empId, payDate, pt, 1000.00d - (9.42d * 4));
+
     }
 
 }

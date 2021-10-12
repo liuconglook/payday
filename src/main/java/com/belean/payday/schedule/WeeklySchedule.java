@@ -14,6 +14,15 @@ public class WeeklySchedule implements PaymentSchedule {
         calendar.setTime(payDate);
         // 2 3 4 5 6 7 1
         int week = calendar.get(Calendar.DAY_OF_WEEK) - 1;
-        return week == 6;
+        return week == Calendar.FRIDAY;
+    }
+
+    @Override
+    public Date getPayPeriodStartDate(Date payDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(payDate);
+        calendar.add(Calendar.DATE, -5);
+
+        return calendar.getTime();
     }
 }

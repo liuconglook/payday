@@ -7,12 +7,10 @@ import java.util.Date;
  * @date 2021/10/7
  */
 public class ServiceCharge {
-    private int memberId;
     private double charge;
     private Date date;
 
-    public ServiceCharge(int memberId, double charge, Date date) {
-        this.memberId = memberId;
+    public ServiceCharge(double charge, Date date) {
         this.charge = charge;
         this.date = date;
     }

@@ -2,7 +2,6 @@ package com.belean.payday.transaction;
 
 import com.belean.payday.MockDatabase;
 import com.belean.payday.PayrollDatabase;
-import com.belean.payday.affiliation.Affiliation;
 import com.belean.payday.classification.CommissionedClassification;
 import com.belean.payday.classification.PaymentClassification;
 import com.belean.payday.classification.SalesReceipt;

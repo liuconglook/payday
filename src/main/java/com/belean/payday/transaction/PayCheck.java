@@ -12,10 +12,11 @@ public class PayCheck {
     private double grossPay;
     private double deductions;
     private double netPay;
-    private Date payPeriodEndDate;
+    private Date payPeriodStartDate;
     private String disposition;
 
-    public PayCheck(Date payDate) {
+    public PayCheck(Date payPeriodStartDate, Date payDate) {
+        this.payPeriodStartDate = payPeriodStartDate;
         this.payDate = payDate;
     }
 
@@ -47,12 +48,8 @@ public class PayCheck {
         this.netPay = netPay;
     }
 
-    public void setPayPeriodEndDate(Date payPeriodEndDate) {
-        this.payPeriodEndDate = payPeriodEndDate;
-    }
-
-    public Date getPayPeriodEndDate() {
-        return payPeriodEndDate;
+    public Date getPayPeriodStartDate() {
+        return payPeriodStartDate;
     }
 
     public void setDisposition(String disposition) {
@@ -66,11 +63,11 @@ public class PayCheck {
     @Override
     public boolean equals(Object obj) {
         PayCheck payCheck = (PayCheck)obj;
-        return this.payDate.equals(payCheck.getPayDate()) && this.payPeriodEndDate.equals(payCheck.getPayPeriodEndDate());
+        return this.payDate.equals(payCheck.getPayDate()) && this.payPeriodStartDate.equals(payCheck.getPayPeriodStartDate());
     }
 
     @Override
     public int hashCode() {
-        return this.payDate.hashCode() + this.payPeriodEndDate.hashCode();
+        return this.payDate.hashCode() + this.payPeriodStartDate.hashCode();
     }
 }

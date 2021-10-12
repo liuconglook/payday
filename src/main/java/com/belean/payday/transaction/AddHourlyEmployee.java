@@ -2,7 +2,6 @@ package com.belean.payday.transaction;
 
 import com.belean.payday.classification.HourlyClassification;
 import com.belean.payday.classification.PaymentClassification;
-import com.belean.payday.schedule.BiweeklySchedule;
 import com.belean.payday.schedule.PaymentSchedule;
 import com.belean.payday.schedule.WeeklySchedule;
 

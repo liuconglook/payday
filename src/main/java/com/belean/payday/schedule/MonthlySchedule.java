@@ -14,6 +14,16 @@ public class MonthlySchedule implements PaymentSchedule {
         return isLastDayOfMonth(payDate);
     }
 
+    @Override
+    public Date getPayPeriodStartDate(Date payDate) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(payDate);
+        calendar.set(Calendar.DATE, 1); // 当月1号
+        calendar.add(Calendar.DATE, -1); // 下月最后一天
+
+        return calendar.getTime();
+    }
+
     private boolean isLastDayOfMonth(Date payDate) {
         int month = payDate.getMonth();
         Calendar calendar = Calendar.getInstance();;

@@ -28,7 +28,7 @@ public class PaydayTransaction implements Transaction {
         Map<Integer, Employee> employees = payrollDatabase.employees();
         employees.forEach((empId, employee) -> {
             if (employee.isPayDate(payDate)) {
-                PayCheck payCheck = new PayCheck(payDate);
+                PayCheck payCheck = new PayCheck(employee.getPayPeriodStartDate(payDate), payDate);
                 payChecks.put(empId, payCheck);
                 employee.payDay(payCheck);
             }

@@ -50,9 +50,4 @@ public class MockDatabase implements PayrollDatabase {
     public void removeUnionMember(int memberId) {
         unionMembers.remove(memberId);
     }
-
-    @Override
-    public List<Integer> getAllEmployeeIds() {
-        return employees.keySet().stream().collect(Collectors.toList());
-    }
 }

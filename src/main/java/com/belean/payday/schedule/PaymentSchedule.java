@@ -14,4 +14,11 @@ public interface PaymentSchedule {
      * @return
      */
     boolean isPayDate(Date payDate);
+
+    /**
+     * 获取支付开始时间
+     * @param payDate
+     * @return
+     */
+    Date getPayPeriodStartDate(Date payDate);
 }
