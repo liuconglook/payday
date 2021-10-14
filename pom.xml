@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.belean</groupId>
-    <artifactId>payday</artifactId>
+    <artifactId>payroll</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>payday</name>
     <description>Demo project for Spring Boot</description>
